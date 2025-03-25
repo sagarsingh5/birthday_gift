@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/sagarsingh5/birthday_gift.git/static/css/main.46cc3d24.css",
+    "main.js": "/sagarsingh5/birthday_gift.git/static/js/main.d3673818.js",
+    "static/js/496.fa01220a.chunk.js": "/sagarsingh5/birthday_gift.git/static/js/496.fa01220a.chunk.js",
+    "static/media/home3.jpeg": "/sagarsingh5/birthday_gift.git/static/media/home3.61abfb5446c06d6e91fa.jpeg",
+    "index.html": "/sagarsingh5/birthday_gift.git/index.html",
+    "main.46cc3d24.css.map": "/sagarsingh5/birthday_gift.git/static/css/main.46cc3d24.css.map",
+    "main.d3673818.js.map": "/sagarsingh5/birthday_gift.git/static/js/main.d3673818.js.map",
+    "496.fa01220a.chunk.js.map": "/sagarsingh5/birthday_gift.git/static/js/496.fa01220a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.46cc3d24.css",
+    "static/js/main.d3673818.js"
+  ]
+}

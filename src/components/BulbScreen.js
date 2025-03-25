@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import LazyLoad from 'react-lazyload';
 import { useNavigate } from 'react-router-dom';
 import '../styles/styles.css';
+import data from './Data';
+// import homeBg from "../../public/assets/home.jpeg" 
+ 
 // import '../../public/assets/home.jpeg' 
 const BulbScreen = () => {
   const bulbImages = ['bulb_pink.png', 'bulb_green.png', 'bulb_blue.png', 'bulb_orange.png', 'bulb_red.png', 'bulb_yellow.png'
@@ -11,7 +14,7 @@ const BulbScreen = () => {
   const navigate = useNavigate();
 
   // const backgrounds = [
-  //   '../public/assets/home.jpeg',
+  //   'assets/home.jpeg',
   //   '../public/assets/home.jpeg',
   //   '../public/assets/home.jpeg',
   //   '../public/assets/home.jpeg'
@@ -54,49 +57,9 @@ const BulbScreen = () => {
   const [candleImage, setCandleImage] = useState('/assets/cake.png');
   const [showMessageButton, setShowMessageButton] = useState(false);
   const [isShowingMessage, setIsShowingMessage] = useState(false);
-  const [messages, setMessages] = useState([
-    "Happy 24th Birthday, Smriti! 🎂🎉",
-    "Smriti, you are the melody to my heart’s favorite song. 🎶❤️",
-    "Every heartbeat of mine whispers your name. 💓.",
-    "Your love is my greatest gift, and I cherish it every day. 🎁💕",
-    "If love had a face, it would look just like you. 😘",
-    "Your smile is my sunshine, even on the cloudiest days. ☀️😊",
-    "You're the most amazing person I know, and I'm so lucky to have you in my life.",
-    "Here's to a day filled with love, laughter, and all your favorite things.",
-    "May your year ahead be as bright and beautiful as you are. 🌸",
-    "I love you more than words can say. 💖",
-    "You make every moment magical. Thank you for being you. 🌹",
-    "Forever and always, my love is yours. 💕",
-    "You are the dream I never want to wake up from. 🌙✨",
-    "Smriti, every ‘I love you’ is a promise for forever. 💍❤️",
-    "If love was measured in words, I’d write you a never-ending story. 📜💘",
-    "You are the Taylor Swift song my soul keeps singing. 🎤❤️",
-    "I may not be there, but my heart is always with you. 💞",
-    "Smriti, you are the plot twist that made my love story perfect. 💕📖",
-    "Every moment with you is a beautiful memory in the making. 📸",
-    "Loving you is the easiest and best thing I’ve ever done. 💖",
-    "Your smile is my sunshine, even on the cloudiest days. ☀️😊",
-    "Being with you, even from afar, feels like home. 🏡❤️",
-    "You shine brighter than the birthday candles, my love. ✨",
-    "If love had a face, it would look just like you. 😘",
-    "Your love is my greatest gift, and I cherish it every day. 🎁💕",
-    "Every second spent loving you is a second well-lived. ⏳❤️",
-    "You are my heart’s favorite place to be. 💓🏡",
-    "No distance can fade the glow of our love. 🌍💖",
-    "You are the spark that lights up my darkest days. ✨🔥",
-    "Smriti, you are not just my love—you are my forever. 💞",
-    "Every ‘good morning’ and ‘good night’ feels special because of you. ☀️🌙",
-    "Your love is the magic that makes my world beautiful. 🎩❤️",
-    "If I had one wish, it would be to hold you close, always. 🤗💕",
-    "You are the best chapter in my life’s story. 📖💘",
-    "With you, even the ordinary feels extraordinary. 🌈❤️",
-    "Smriti, you are the missing piece that completed my heart. 🧩💖",
-    "Your love is the sweetest melody my heart plays. 🎼💕",
-    "Every time I think of you, my heart skips a beat. 💓💫",
-    "Loving you is not a choice; it’s the most natural thing I do. 💖",
-    "Smriti, you are my today, my tomorrow, and my always. ♾️❤️"
-  ]);
+  const [messages, setMessages] = useState(data);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
+  const [bgVisible,setBgVisible] = useState(false)
 
   // Refs for audio and interval
   const audioRef = useRef(null);
@@ -122,28 +85,31 @@ const BulbScreen = () => {
   }, []);
 
   const backgrounds = [
-    '../../public/assets/home.jpeg',
-    '../../public/assets/home.jpeg',
-    '../../public/assets/home.jpeg',
-    '../../public/assets/home.jpeg'
+    "/assets/home1.jpeg",
+    "/assets/home2.jpeg",
+    "/assets/home3.jpeg",
+    "/assets/home4.jpeg",
+    "/assets/home5.jpeg",
+    "/assets/home6.jpeg",
+    "/assets/home7.jpeg",
+    
   ];
 
   const [currentBgIndex, setCurrentBgIndex] = useState(0);
-  const [prevBgIndex, setPrevBgIndex] = useState(0);
-  const [animationClass, setAnimationClass] = useState("fade-in");
+  const [fade, setFade] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimationClass("fade-out"); // Start fade-out
+      setFade(true); // Start fade-out
+
       setTimeout(() => {
-        setPrevBgIndex(currentBgIndex); // Store previous background
         setCurrentBgIndex((prev) => (prev + 1) % backgrounds.length);
-        setAnimationClass("fade-in"); // Start fade-in
+        setFade(false); // Start fade-in
       }, 1000); // Match animation duration
-    }, 5000); // Change every 5 seconds
+    }, 10000); // Change every 10 seconds
 
     return () => clearInterval(interval);
-  }, [currentBgIndex]);
+  }, []);
 
 
   // Handle music playback
@@ -151,6 +117,7 @@ const BulbScreen = () => {
     audioRef.current = new Audio('/assets/song.mp4'); // Use your desired song
     audioRef.current.play();
 
+    setBgVisible(true)
     setShowButton(false);
     setMusicPlayed(true);
 
@@ -264,6 +231,8 @@ const BulbScreen = () => {
         style={{ backgroundImage: `url(${backgrounds[currentBgIndex]})` }}
       ></div> */}
 
+        {bgVisible && (<div className={`background ${fade ? "fade-out" : "fade-in"}`}
+      style={{ backgroundImage: `url(${backgrounds[currentBgIndex]})` }}></div>)}
         {/* Bulb images */}
         {bulbImages.map((imageName, index) => (
           <LazyLoad key={index} height={100} offset={[-100, 100]} placeholder={<div className="bulb" />}>
